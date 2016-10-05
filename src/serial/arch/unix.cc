@@ -31,9 +31,9 @@
 #include <stdexcept>
 #include <string.h>
 
-#include "arch/unix.h"
+#include <sweep/serial/arch/unix.h>
 
-#include "serial.h"
+#include <sweep/serial/serial.h>
 
 using std::invalid_argument;
 

@@ -26,8 +26,8 @@
 #include <cstdio>
 #include <cstring>
 #include <stdlib.h>
-#include "util.h"
-#include "sweep.h"
+#include <sweep/util.h>
+#include <sweep/sweep.h>
 
 struct scan_data
 {

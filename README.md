@@ -15,3 +15,10 @@ Get the code:
 Build:
 
     make
+    sudo make install
+
+In your project:
+
+    g++ -Wall -Wextra -pedantic -std=c++11 example/example.cc -lsweep-sdk-cpp -pthread
+
+Link the `libsweep-sdk-cpp` library and include `<sweep/*.h>` header in your code; see the example.

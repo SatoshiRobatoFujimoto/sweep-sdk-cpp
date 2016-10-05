@@ -1,33 +1,28 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(sweep-sdk-cpp)
+cmake_minimum_required(VERSION 2.8.11)
+project(sweep-sdk-cpp LANGUAGES CXX)
 
-## Sources
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+
+# Library sources to built
 set(sweep-sdk-cpp_SRCS
         src/serial/serial.cc
         src/sweep_driver.cc
-        src/util.cc
-        )
+        src/util.cc)
 
 if (APPLE)
-    # If OSX
     list(APPEND sweep-sdk-cpp_SRCS src/serial/arch/unix.cc)
 elseif (UNIX)
-    # If unix
     list(APPEND sweep-sdk-cpp_SRCS src/serial/arch/unix.cc)
 else ()
-    # If windows
     list(APPEND sweep-sdk-cpp_SRCS src/serial/arch/win.cc)
 endif ()
 
-add_library(${PROJECT_NAME} ${sweep-sdk-cpp_SRCS})
+find_package(Threads REQUIRED)
 
-## Include headers
-include_directories(inc inc/serial)
+add_library(sweep-sdk-cpp ${sweep-sdk-cpp_SRCS})
+target_link_libraries(sweep-sdk-cpp ${CMAKE_THREAD_LIBS_INIT})
+target_include_directories(sweep-sdk-cpp PUBLIC include include/serial)
+install(TARGETS sweep-sdk-cpp DESTINATION lib)
+install(DIRECTORY include/sweep DESTINATION include)
 
-## Uncomment for example
-add_executable(example src/example.cc)
-add_dependencies(example ${PROJECT_NAME})
-target_link_libraries(example ${PROJECT_NAME} pthread)
-
-
-
+add_subdirectory(example)

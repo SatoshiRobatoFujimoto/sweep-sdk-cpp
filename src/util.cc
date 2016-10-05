@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-#include "util.h"
+#include <sweep/util.h>
 
 uint64_t gettime_us()
 {

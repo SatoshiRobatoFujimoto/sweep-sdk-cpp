@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-#include "serial.h"
+#include <sweep/serial/serial.h>
 
 #ifdef _WIN32
-#include "arch/win.h"
+#include <sweep/serial/arch/win.h>
 #else
-#include "arch/unix.h"
+#include <sweep/serial/arch/unix.h>
 #endif
 
 
