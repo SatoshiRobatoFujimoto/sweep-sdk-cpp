@@ -23,9 +23,9 @@
 
 #if defined(_WIN32)
 
-#include "arch/win.h"
+#include <sweep/serial/arch/win.h>
 
-#include "serial.h"
+#include <sweep/serial/serial.h>
 #include <stdexcept>
 
 using std::invalid_argument;

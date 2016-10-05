@@ -23,8 +23,8 @@
 
 #pragma once
 
-#include "serial/serial.h"
-#include "sweep_protocol.h"
+#include <sweep/serial/serial.h>
+#include <sweep/sweep_protocol.h>
 
 #define DEFAULT_TIMEOUT 3000 // 3000 ms
 #define MAX_SCAN_PACKETS 2048

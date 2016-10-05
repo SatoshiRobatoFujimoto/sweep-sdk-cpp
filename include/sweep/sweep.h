@@ -23,8 +23,8 @@
 
 #pragma once
 
-#include "stypes.h"
+#include <sweep/stypes.h>
 
-#include "sweep_driver.h"
-#include "sweep_protocol.h"
-#include "util.h"
+#include <sweep/sweep_driver.h>
+#include <sweep/sweep_protocol.h>
+#include <sweep/util.h>

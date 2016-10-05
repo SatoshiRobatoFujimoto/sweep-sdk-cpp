@@ -25,10 +25,10 @@
 #define SERIAL_H
 
 #ifdef _WIN32
-#include "arch/win.h"
+#include <sweep/serial/arch/win.h>
 #else
 
-#include "arch/unix.h"
+#include <sweep/serial/arch/unix.h>
 
 #endif
 
@@ -36,7 +36,7 @@
 
 #include <sstream>
 #include <string>
-#include <v8stdint.h>
+#include <sweep/serial/v8stdint.h>
 
 /*The MIT License (MIT)
  *

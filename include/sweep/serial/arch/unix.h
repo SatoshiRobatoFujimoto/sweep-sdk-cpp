@@ -29,7 +29,7 @@
 #include <iostream>
 #include <string>
 #include <termios.h>
-#include <v8stdint.h>
+#include <sweep/serial/v8stdint.h>
 
 class SerialArch {
 public:
