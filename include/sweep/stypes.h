@@ -27,6 +27,6 @@
 
 typedef uint32_t status;
 
-#define S_OK                    0
-#define S_FAIL                  1
-#define S_TIMEOUT               2
+#define S_OK 0
+#define S_FAIL 1
+#define S_TIMEOUT 2

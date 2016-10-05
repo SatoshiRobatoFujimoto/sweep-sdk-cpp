@@ -23,23 +23,18 @@
 
 #include <sweep/util.h>
 
-uint64_t gettime_us()
-{
-    struct timespec t;
-    t.tv_sec = 0;
-    t.tv_nsec = 0;
-    clock_gettime(CLOCK_MONOTONIC, &t);
-    return t.tv_sec * 1000000LL + t.tv_nsec / 1000;
+uint64_t gettime_us() {
+  struct timespec t;
+  t.tv_sec = 0;
+  t.tv_nsec = 0;
+  clock_gettime(CLOCK_MONOTONIC, &t);
+  return t.tv_sec * 1000000LL + t.tv_nsec / 1000;
 }
 
-uint32_t gettime_ms()
-{
-    struct timespec t;
-    t.tv_sec = 0;
-    t.tv_nsec = 0;
-    clock_gettime(CLOCK_MONOTONIC, &t);
-    return t.tv_sec * 1000L + t.tv_nsec / 1000000L;
+uint32_t gettime_ms() {
+  struct timespec t;
+  t.tv_sec = 0;
+  t.tv_nsec = 0;
+  clock_gettime(CLOCK_MONOTONIC, &t);
+  return t.tv_sec * 1000L + t.tv_nsec / 1000000L;
 }
-
-
-

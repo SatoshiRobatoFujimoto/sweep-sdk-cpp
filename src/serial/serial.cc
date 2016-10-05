@@ -29,49 +29,20 @@
 #include <sweep/serial/arch/unix.h>
 #endif
 
+Serial::Serial(const std::string &port, uint32_t baudrate, uint32_t timeout) : parch_(new SerialArch(port, baudrate, timeout)) {}
 
-Serial::Serial(const std::string &port, uint32_t baudrate, uint32_t timeout)
-        : parch_(new SerialArch(port, baudrate, timeout))
-{
+Serial::~Serial() { delete parch_; }
 
-}
+void Serial::open() { parch_->open(); }
 
-Serial::~Serial()
-{
-    delete parch_;
-}
+void Serial::close() { parch_->close(); }
 
-void Serial::open()
-{
-    parch_->open();
-}
+bool Serial::isOpen() { return parch_->isOpen(); }
 
-void Serial::close()
-{
-    parch_->close();
-}
+void Serial::flush() { parch_->flush(); }
 
-bool Serial::isOpen()
-{
-    return parch_->isOpen();
-}
+size_t Serial::write(const uint8_t *data, size_t length) { return parch_->write(data, length); }
 
-void Serial::flush()
-{
-    parch_->flush();
-}
+size_t Serial::read(uint8_t *buf, size_t size) { return parch_->read(buf, size); }
 
-size_t Serial::write(const uint8_t *data, size_t length)
-{
-    return parch_->write(data, length);
-}
-
-size_t Serial::read(uint8_t *buf, size_t size)
-{
-    return parch_->read(buf, size);
-}
-
-bool Serial::waitReadable()
-{
-    return parch_->waitReadable();
-}
+bool Serial::waitReadable() { return parch_->waitReadable(); }

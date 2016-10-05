@@ -26,41 +26,39 @@
 #ifndef UNIX_H
 #define UNIX_H
 
-#include <string>
-#include <v8stdint.h>
 #include <iostream>
+#include <string>
 #include <termios.h>
+#include <v8stdint.h>
 
-class SerialArch
-{
+class SerialArch {
 public:
-    SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
+  SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
 
-    virtual ~SerialArch();
+  virtual ~SerialArch();
 
-    void open();
+  void open();
 
-    void close();
+  void close();
 
-    bool isOpen();
+  bool isOpen();
 
-    void flush();
+  void flush();
 
-    size_t write(const uint8_t *data, size_t length);
+  size_t write(const uint8_t *data, size_t length);
 
-    size_t read(uint8_t *buf, size_t size);
+  size_t read(uint8_t *buf, size_t size);
 
-    bool waitReadable();
-
+  bool waitReadable();
 
 private:
-    speed_t getbaud(uint32_t baudrate);
+  speed_t getbaud(uint32_t baudrate);
 
-    std::string port_;
-    uint32_t baudrate_;
-    int fd_;
-    bool is_open_;
-    uint32_t timeout;
+  std::string port_;
+  uint32_t baudrate_;
+  int fd_;
+  bool is_open_;
+  uint32_t timeout;
 };
 
 #endif // UNIX_H
