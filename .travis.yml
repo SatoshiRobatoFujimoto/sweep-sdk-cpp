@@ -47,3 +47,6 @@ before_install:
 install:
   - make
   - sudo make install
+
+script:
+  - echo "Nothing to run"
