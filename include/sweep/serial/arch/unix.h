@@ -21,47 +21,46 @@
  * SOFTWARE.
  */
 
-#if defined(_WIN32)
+#if !defined(_WIN32)
 
-#ifndef WIN_H
-#define WIN_H
+#ifndef UNIX_H
+#define UNIX_H
 
-#include <windows.h>
-#include <v8stdint.h>
 #include <iostream>
+#include <string>
+#include <termios.h>
+#include <sweep/serial/v8stdint.h>
 
 class SerialArch {
-    public:
-    enum{
-        SERIAL_RX_BUFFER_SIZE = 512,
-        SERIAL_TX_BUFFER_SIZE = 128
-    };
-        SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
+public:
+  SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
 
-        virtual ~SerialArch();
+  virtual ~SerialArch();
 
-        void open();
-        void close();
-        bool isOpen();
-        void flush();
-        size_t write(const uint8_t *data, size_t length);
-        size_t read(uint8_t *buf, size_t size);
-        bool waitReadable();
+  void open();
 
+  void close();
 
-    private:
-        std::string port_;
-        uint32_t baudrate_;
-        HANDLE fd_;
-        bool is_open_;
-        uint32_t timeout;
-        DCB dcb_;
-        COMMTIMEOUTS co_;
-        OVERLAPPED wait_o_;
-        OVERLAPPED ro_, wo_;
+  bool isOpen();
 
+  void flush();
+
+  size_t write(const uint8_t *data, size_t length);
+
+  size_t read(uint8_t *buf, size_t size);
+
+  bool waitReadable();
+
+private:
+  speed_t getbaud(uint32_t baudrate);
+
+  std::string port_;
+  uint32_t baudrate_;
+  int fd_;
+  bool is_open_;
+  uint32_t timeout;
 };
 
-#endif // WIN_H
+#endif // UNIX_H
 
-#endif // defined(_WIN32)
+#endif // !defined(_WIN32)

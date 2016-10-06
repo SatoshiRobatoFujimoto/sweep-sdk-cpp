@@ -1,25 +1,23 @@
-all: sweep-sdk-cpp
+default: example
 
-CMAKE_FLAGS := -DCMAKE_INSTALL_PREFIX=/tmp/usr/local
-UNAME := $(shell uname -s)
+BUILD_TYPE ?= Release
+BUILD_DIR := build/${BUILD_TYPE}
+ROOT_DIR := $(shell pwd)
 
+${BUILD_DIR}/Makefile: CMakeLists.txt
+	@mkdir -p ${BUILD_DIR}
+	@cd ${BUILD_DIR} && cmake ${ROOT_DIR} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
 
-install:
-	cd build && make install
+sdk: ${BUILD_DIR}/Makefile
+	@cmake --build ${BUILD_DIR} --target sweep-sdk-cpp
 
-uninstall:
-	cd build && make uninstall
+example: sdk
+	@cmake --build ${BUILD_DIR} --target sweep-sdk-cpp-example
 
-sweep-sdk-cpp:
-	@mkdir -p build
-	cd build && cmake $(CMAKE_FLAGS) ..
-ifneq ($(MAKE),)
-	cd build && $(MAKE)
-else
-	cd build && make
-endif
+install: sdk
+	@cmake --build ${BUILD_DIR} --target install
 
-.PHONY: clean
 clean:
-	rm -rf build
+	@${RM} -rf ${BUILD_DIR}
 
+.PHONY: sdk example install clean

@@ -21,48 +21,12 @@
  * SOFTWARE.
  */
 
-#if !defined(_WIN32)
+#pragma once
 
-#ifndef UNIX_H
-#define UNIX_H
+#include <stdint.h>
 
-#include <string>
-#include <v8stdint.h>
-#include <iostream>
-#include <termios.h>
+typedef uint32_t status;
 
-class SerialArch
-{
-public:
-    SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
-
-    virtual ~SerialArch();
-
-    void open();
-
-    void close();
-
-    bool isOpen();
-
-    void flush();
-
-    size_t write(const uint8_t *data, size_t length);
-
-    size_t read(uint8_t *buf, size_t size);
-
-    bool waitReadable();
-
-
-private:
-    speed_t getbaud(uint32_t baudrate);
-
-    std::string port_;
-    uint32_t baudrate_;
-    int fd_;
-    bool is_open_;
-    uint32_t timeout;
-};
-
-#endif // UNIX_H
-
-#endif // !defined(_WIN32)
+#define S_OK 0
+#define S_FAIL 1
+#define S_TIMEOUT 2

@@ -21,10 +21,42 @@
  * SOFTWARE.
  */
 
-#pragma once
+#if defined(_WIN32)
 
-#include "stypes.h"
+#ifndef WIN_H
+#define WIN_H
 
-#include "sweep_driver.h"
-#include "sweep_protocol.h"
-#include "util.h"
+#include <iostream>
+#include <sweep/serial/v8stdint.h>
+#include <windows.h>
+
+class SerialArch {
+public:
+  enum { SERIAL_RX_BUFFER_SIZE = 512, SERIAL_TX_BUFFER_SIZE = 128 };
+  SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout);
+
+  virtual ~SerialArch();
+
+  void open();
+  void close();
+  bool isOpen();
+  void flush();
+  size_t write(const uint8_t *data, size_t length);
+  size_t read(uint8_t *buf, size_t size);
+  bool waitReadable();
+
+private:
+  std::string port_;
+  uint32_t baudrate_;
+  HANDLE fd_;
+  bool is_open_;
+  uint32_t timeout;
+  DCB dcb_;
+  COMMTIMEOUTS co_;
+  OVERLAPPED wait_o_;
+  OVERLAPPED ro_, wo_;
+};
+
+#endif // WIN_H
+
+#endif // defined(_WIN32)

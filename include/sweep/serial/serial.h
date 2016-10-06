@@ -25,18 +25,18 @@
 #define SERIAL_H
 
 #ifdef _WIN32
-#include "arch/win.h"
+#include <sweep/serial/arch/win.h>
 #else
 
-#include "arch/unix.h"
+#include <sweep/serial/arch/unix.h>
 
 #endif
 
 #define TIMEOUT -1
 
-#include <string>
 #include <sstream>
-#include <v8stdint.h>
+#include <string>
+#include <sweep/serial/v8stdint.h>
 
 /*The MIT License (MIT)
  *
@@ -61,57 +61,48 @@
  * SOFTWARE.
  */
 
-class Serial
-{
+class Serial {
 public:
+  Serial(const std::string &port = "", uint32_t baudrate = 115200, uint32_t timeout = 1000);
 
-    Serial(const std::string &port = "", uint32_t baudrate = 115200, uint32_t timeout = 1000);
+  /*! Destructor */
+  virtual ~Serial();
 
-    /*! Destructor */
-    virtual ~Serial();
+  void open();
 
-    void open();
+  void close();
 
-    void close();
+  bool isOpen();
 
-    bool isOpen();
+  void flush();
 
-    void flush();
+  size_t write(const uint8_t *data, size_t length);
 
-    size_t write(const uint8_t *data, size_t length);
+  size_t read(uint8_t *buf, size_t size);
 
-    size_t read(uint8_t *buf, size_t size);
-
-    bool waitReadable();
+  bool waitReadable();
 
 private:
-    SerialArch *parch_;
-
+  SerialArch *parch_;
 };
 
-class Exception : public std::exception
-{
-    Exception &operator=(const Exception &);
+class Exception : public std::exception {
+  Exception &operator=(const Exception &);
 
-    std::string e_what_;
+  std::string e_what_;
+
 public:
-    Exception(const char *description)
-    {
-        std::stringstream ss;
-        ss << "Exception " << description;
-        e_what_ = ss.str();
-    }
+  Exception(const char *description) {
+    std::stringstream ss;
+    ss << "Exception " << description;
+    e_what_ = ss.str();
+  }
 
-    Exception(const Exception &other) : e_what_(other.e_what_)
-    {}
+  Exception(const Exception &other) : e_what_(other.e_what_) {}
 
-    virtual ~Exception() throw()
-    {}
+  virtual ~Exception() throw() {}
 
-    virtual const char *what() const throw()
-    {
-        return e_what_.c_str();
-    }
+  virtual const char *what() const throw() { return e_what_.c_str(); }
 };
 
 #endif

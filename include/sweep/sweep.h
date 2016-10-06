@@ -23,10 +23,8 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <sweep/stypes.h>
 
-typedef uint32_t status;
-
-#define S_OK                    0
-#define S_FAIL                  1
-#define S_TIMEOUT               2
+#include <sweep/sweep_driver.h>
+#include <sweep/sweep_protocol.h>
+#include <sweep/util.h>
