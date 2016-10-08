@@ -35,9 +35,9 @@ matrix:
     #      packages: ['clang-3.9']
     #  env: CCOMPILER='clang-3.9' CXXCOMPILER='clang++-3.9'
 
-    - os: osx
-      osx_image: xcode8
-      env: CCOMPILER='clang' CXXCOMPILER='clang++'
+    #- os: osx
+    #  osx_image: xcode8
+    #  env: CCOMPILER='clang' CXXCOMPILER='clang++'
 
 
 before_install:
