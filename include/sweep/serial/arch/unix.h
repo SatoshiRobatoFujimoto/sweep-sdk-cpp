@@ -56,9 +56,9 @@ private:
 
   std::string port_;
   uint32_t baudrate_;
+  uint32_t timeout;
   int fd_;
   bool is_open_;
-  uint32_t timeout;
 };
 
 #endif // UNIX_H

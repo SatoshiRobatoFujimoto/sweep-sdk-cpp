@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.11)
-project(sweep-sdk-cpp LANGUAGES C CXX)
+project(sweep-sdk-cpp)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -pedantic")
 
 # Library sources to built
 set(sweep-sdk-cpp_SRCS

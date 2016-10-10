@@ -38,7 +38,7 @@
 using std::invalid_argument;
 
 SerialArch::SerialArch(const std::string &port, uint32_t baudrate, uint32_t timeout)
-    : port_(port), fd_(-1), is_open_(false), baudrate_(baudrate), timeout(timeout) {
+    : port_(port), baudrate_(baudrate), timeout(timeout), fd_(-1), is_open_(false){
   open();
 }
 

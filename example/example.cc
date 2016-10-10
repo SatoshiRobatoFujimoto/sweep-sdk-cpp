@@ -32,7 +32,7 @@
 struct scan_data
 {
     sweep_response_scan_packet_t packets[2000];
-    int count;
+    uint32_t count;
 };
 
 void *processCompleteScan(void *new_data);
